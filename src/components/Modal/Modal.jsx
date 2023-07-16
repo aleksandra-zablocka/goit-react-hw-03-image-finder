@@ -19,10 +19,10 @@ class Modal extends Component {
     return (
       <div>
         {isModalOpen && (
-          <div className={css.Overlay}>
-            <div className={css.Modal}>
+          <div className={css.overlay}>
+            <div className={css.modal}>
               <img src={images.webformatURL} alt={images.tags} />
-              <button type="button" onClick={toggleModal}>
+              <button className={css.closeButton} type="button" onClick={toggleModal}>
                 Close X
               </button>
             </div>

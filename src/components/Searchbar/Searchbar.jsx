@@ -5,9 +5,9 @@ class Searchbar extends Component {
     render() {
       const {inputSearch, handleChange, handleSubmit} = this.props
     return (
-      <header className={css.Searchbar}>
-        <form className={css.SearchForm} onSubmit={handleSubmit}>
-          <button className={css.SearchFormButton} type="submit">
+      <header className={css.searchbar}>
+        <form className={css.searchForm} onSubmit={handleSubmit}>
+          <button className={css.searchFormButton} type="submit">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 50 50"
@@ -24,7 +24,7 @@ class Searchbar extends Component {
             name="inputSearch"
             value={inputSearch}
             onChange={handleChange}
-            className={css.SearchFormInput}
+            className={css.searchFormInput}
             placeholder="Search images and photos"
           />
         </form>

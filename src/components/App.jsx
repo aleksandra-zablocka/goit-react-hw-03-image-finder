@@ -10,30 +10,36 @@ const API_KEY = '36802043-6369625f376675122720202cd';
 export class App extends Component {
   state = {
     images: [],
+    per_page: 12,
     inputSearch: '',
     isLoading: false,
     isModalOpen: false,
   };
 
   async componentDidMount() {
+    // if (this.state.inputSearch !== '') {
+    //   this.fetchImages();
+    // }
+
     this.fetchImages();
   }
 
-  // async componentDidUpdate(prevState, prevProps) {
-  //   const {inputSearch, images} = this.state;
-  //   if (prevState.inputSearch !== inputSearch && inputSearch.length > 0) {
-  //    await this.fetchImages();
-  //   }
+  async componentDidUpdate(prevProps, prevState) {
+    if (prevState.per_page !== this.state.per_page) {
+      this.fetchImages();
+    }
+  }
 
-  //   if (inputSearch.length === 0 && images.length > 0) {this.setState({images: []})}
-  // }
+  async componentWillUnmount() {
+    this.setState({ images: [] });
+  }
 
   fetchImages = async () => {
-    const { inputSearch } = this.state;
+    const { inputSearch, per_page } = this.state;
     this.setState({ isLoading: true });
     try {
       const response = await fetch(
-        `https://pixabay.com/api/?q=cat&page=1&key=${API_KEY}&lang=eng&q=${inputSearch}&image_type=photo&orientation=horizontal&per_page=12`
+        `https://pixabay.com/api/?q=cat&page=1&key=${API_KEY}&lang=eng&q=${inputSearch}&image_type=photo&orientation=horizontal&per_page=${per_page}`
       );
 
       if (!response.ok) {
@@ -58,7 +64,6 @@ export class App extends Component {
 
   handleChange = e => {
     const { value, name } = e.target;
-    // this.setState(prevState => ({ ...prevState, [name]: value }));
     this.setState({ [name]: value });
   };
 
@@ -69,23 +74,36 @@ export class App extends Component {
     }));
   };
 
+  loadMore = () => {
+    this.setState(prevState => ({
+      ...prevState,
+      per_page: prevState.per_page + 12,
+    }));
+  };
+
   render() {
-    const { inputSearch, images, isLoading, isModalOpen } = this.state;
+    const { inputSearch, images, isLoading, isModalOpen, per_page } =
+      this.state;
     return (
       <div>
+        {/* <h1>{per_page}</h1> */}
         <Searchbar
           inputSearch={inputSearch}
           handleSubmit={this.handleSubmit}
           handleChange={this.handleChange}
         />
-        
+
         {isLoading ? (
           <Loader />
         ) : (
           <ImageGallery images={images} toggleModal={this.toggleModal} />
         )}
-        <Button />
-        <Modal images={images} isModalOpen={isModalOpen} toggleModal={this.toggleModal} />
+        <Button per_page={per_page} loadMore={this.loadMore} />
+        <Modal
+          images={images}
+          isModalOpen={isModalOpen}
+          toggleModal={this.toggleModal}
+        />
       </div>
     );
   }

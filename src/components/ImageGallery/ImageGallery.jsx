@@ -9,7 +9,7 @@ class ImageGallery extends Component {
     return (
       <div>
         {images.length > 0 ? (
-          <ul className={css.ImageGallery}>
+          <ul className={css.imageGallery}>
             {images.map(el => (
               <ImageGalleryItem
                 key={el.id}
@@ -20,7 +20,7 @@ class ImageGallery extends Component {
             ))}
           </ul>
         ) : (
-          <div>No images found</div>
+          <div className={css.noImages}>No images found</div>
         )}
       </div>
     );

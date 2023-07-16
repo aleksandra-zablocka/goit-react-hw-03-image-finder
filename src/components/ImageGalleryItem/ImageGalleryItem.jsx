@@ -11,8 +11,8 @@ class ImageGalleryItem extends Component {
     const { src, alt } = this.props;
 
     return (
-      <li className={css.ImageGalleryItem}>
-        <img className={css.ImageGalleryItemImage} src={src} alt={alt} onClick={this.handleClick}/>
+      <li className={css.imageGalleryItem}>
+        <img className={css.imageGalleryItemImage} src={src} alt={alt} onClick={this.handleClick}/>
       </li>
     );
   }
