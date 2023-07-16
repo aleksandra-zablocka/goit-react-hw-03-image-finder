@@ -3,7 +3,7 @@ import { Component } from 'react';
 
 class Button extends Component {
   render() {
-    return <div>Button</div>;
+    return <div>Load more</div>;
   }
 }
 
