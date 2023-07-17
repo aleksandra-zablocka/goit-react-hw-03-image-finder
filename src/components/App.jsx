@@ -86,7 +86,7 @@ export class App extends Component {
       this.state;
     return (
       <div>
-        {/* <h1>{per_page}</h1> */}
+        <h1>{per_page}</h1>
         <Searchbar
           inputSearch={inputSearch}
           handleSubmit={this.handleSubmit}
