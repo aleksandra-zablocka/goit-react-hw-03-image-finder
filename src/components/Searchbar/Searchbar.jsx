@@ -1,9 +1,10 @@
 import css from './Searchbar.module.css';
 import { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class Searchbar extends Component {
-    render() {
-      const {inputSearch, handleChange, handleSubmit} = this.props
+  render() {
+    const { inputSearch, handleChange, handleSubmit } = this.props;
     return (
       <header className={css.searchbar}>
         <form className={css.searchForm} onSubmit={handleSubmit}>
@@ -28,9 +29,15 @@ class Searchbar extends Component {
             placeholder="Search images and photos"
           />
         </form>
-          </header>
+      </header>
     );
   }
 }
+
+Searchbar.propTypes = {
+  inputSearch: PropTypes.string,
+  handleSubmit: PropTypes.func,
+  handleChange: PropTypes.func,
+};
 
 export default Searchbar;

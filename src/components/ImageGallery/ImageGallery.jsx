@@ -1,6 +1,7 @@
 import css from './ImageGallery.module.css';
 import { Component } from 'react';
 import ImageGalleryItem from 'components/ImageGalleryItem/ImageGalleryItem';
+import PropTypes from 'prop-types';
 
 class ImageGallery extends Component {
   render() {
@@ -26,5 +27,16 @@ class ImageGallery extends Component {
     );
   }
 }
+
+ImageGallery.propTypes = {
+  images: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number,
+      webformatURL: PropTypes.string,
+      tags: PropTypes.string,
+    })
+  ),
+  toggleModal: PropTypes.func,
+};
 
 export default ImageGallery;

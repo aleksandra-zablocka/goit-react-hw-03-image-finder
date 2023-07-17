@@ -1,5 +1,6 @@
 import css from './Button.module.css';
 import { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class Button extends Component {
   handleClick = () => {
@@ -17,5 +18,10 @@ class Button extends Component {
     );
   }
 }
+
+Button.propTypes = {
+  per_page: PropTypes.number,
+  loadMore: PropTypes.func,
+};
 
 export default Button;
