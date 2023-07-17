@@ -10,6 +10,7 @@ export class App extends Component {
   state = {
     images: [],
     per_page: 12,
+    page: 1,
     inputSearch: '',
     isLoading: false,
   };
@@ -18,7 +19,7 @@ export class App extends Component {
     // if (this.state.inputSearch !== '') {
     //   this.fetchImages();
     // }
-    this.fetchImages();
+    // this.fetchImages();
   }
 
   async componentDidUpdate(prevProps, prevState) {
@@ -32,22 +33,21 @@ export class App extends Component {
   }
 
   fetchImages = async () => {
-    const { inputSearch, per_page } = this.state;
+    const { inputSearch, page, per_page } = this.state;
     this.setState({ isLoading: true });
     try {
       const response = await fetch(
-        `https://pixabay.com/api/?q=cat&page=1&key=${API_KEY}&lang=eng&q=${inputSearch}&image_type=photo&orientation=horizontal&per_page=${per_page}`
-        // `https://pixabay.com/api/?q=cat&page=1&key=${API_KEY}&lang=eng&q=${inputSearch}&image_type=photo&orientation=horizontal`
+        `https://pixabay.com/api/?key=${API_KEY}&lang=eng&q=${inputSearch}&image_type=photo&orientation=horizontal&per_page=${per_page}&page=${page}`
       );
-
+  
       if (!response.ok) {
         throw new Error('Network response failed');
       }
-
+  
       const data = await response.json();
-
-      this.setState(prevState => ({ ...prevState, images: data.hits }));
-
+  
+      this.setState(prevState => ({ images: [...prevState.images, ...data.hits] }));
+  
       console.log(this.state.images);
     } catch (error) {
       console.log('error', error);
@@ -69,13 +69,12 @@ export class App extends Component {
 
   loadMore = () => {
     this.setState(prevState => ({
-      ...prevState,
-      per_page: prevState.per_page + 12,
-    }));
+            page: prevState.page + 1,
+    }),() => {this.fetchImages()});
   };
 
   render() {
-    const { inputSearch, images, isLoading, per_page } =
+    const { inputSearch, images, isLoading, per_page, page } =
       this.state;
     return (
       <div>
@@ -91,7 +90,7 @@ export class App extends Component {
         ) : (
           <ImageGallery images={images} toggleModal={this.toggleModal} />
         )}
-        <Button per_page={per_page} loadMore={this.loadMore} />
+        <Button page={page} loadMore={this.loadMore} />
       </div>
     );
   }

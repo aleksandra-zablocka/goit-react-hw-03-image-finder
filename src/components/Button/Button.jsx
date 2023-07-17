@@ -3,12 +3,12 @@ import { Component } from 'react';
 import PropTypes from 'prop-types';
 
 class Button extends Component {
-  handleClick = () => {
+  handleClick = e => {
+    e.preventDefault(); // Zapobiegamy domyślnemu działaniu przycisku
     this.props.loadMore();
   };
 
   render() {
-    // const {loadMore, per_page} = this.props;
     return (
       <div className={css.loadMore}>
         <button className={css.button} onClick={this.handleClick} type="button">
@@ -20,7 +20,7 @@ class Button extends Component {
 }
 
 Button.propTypes = {
-  per_page: PropTypes.number,
+  page: PropTypes.number,
   loadMore: PropTypes.func,
 };
 
