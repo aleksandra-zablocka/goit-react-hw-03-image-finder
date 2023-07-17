@@ -2,7 +2,6 @@ import Searchbar from './Searchbar/Searchbar';
 import ImageGallery from './ImageGallery/ImageGallery';
 import Loader from './Loader/Loader';
 import Button from './Button/Button';
-import Modal from './Modal/Modal';
 import { Component } from 'react';
 
 const API_KEY = '36802043-6369625f376675122720202cd';
@@ -76,7 +75,7 @@ export class App extends Component {
   };
 
   render() {
-    const { inputSearch, images, isLoading, isModalOpen, per_page } =
+    const { inputSearch, images, isLoading, per_page } =
       this.state;
     return (
       <div>

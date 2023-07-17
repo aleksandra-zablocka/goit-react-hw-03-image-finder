@@ -39,7 +39,7 @@ class ImageGalleryItem extends Component {
   }
 }
 
-ImageGalleryItem.PropTypes = {
+ImageGalleryItem.propTypes = {
   key: PropTypes.number,
   src: PropTypes.string,
   alt: PropTypes.string,
