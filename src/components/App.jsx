@@ -13,14 +13,12 @@ export class App extends Component {
     per_page: 12,
     inputSearch: '',
     isLoading: false,
-    isModalOpen: false,
   };
 
   async componentDidMount() {
     // if (this.state.inputSearch !== '') {
     //   this.fetchImages();
     // }
-
     this.fetchImages();
   }
 
@@ -40,6 +38,7 @@ export class App extends Component {
     try {
       const response = await fetch(
         `https://pixabay.com/api/?q=cat&page=1&key=${API_KEY}&lang=eng&q=${inputSearch}&image_type=photo&orientation=horizontal&per_page=${per_page}`
+        // `https://pixabay.com/api/?q=cat&page=1&key=${API_KEY}&lang=eng&q=${inputSearch}&image_type=photo&orientation=horizontal`
       );
 
       if (!response.ok) {
@@ -49,6 +48,8 @@ export class App extends Component {
       const data = await response.json();
 
       this.setState(prevState => ({ ...prevState, images: data.hits }));
+
+      console.log(this.state.images);
     } catch (error) {
       console.log('error', error);
       return error;
@@ -65,13 +66,6 @@ export class App extends Component {
   handleChange = e => {
     const { value, name } = e.target;
     this.setState({ [name]: value });
-  };
-
-  toggleModal = () => {
-    this.setState(prevState => ({
-      ...prevState,
-      isModalOpen: !prevState.isModalOpen,
-    }));
   };
 
   loadMore = () => {
@@ -99,11 +93,6 @@ export class App extends Component {
           <ImageGallery images={images} toggleModal={this.toggleModal} />
         )}
         <Button per_page={per_page} loadMore={this.loadMore} />
-        <Modal
-          images={images}
-          isModalOpen={isModalOpen}
-          toggleModal={this.toggleModal}
-        />
       </div>
     );
   }
