@@ -15,10 +15,10 @@ export class App extends Component {
   };
 
   async componentDidMount() {
-    // if (this.state.inputSearch !== '') {
-    //   this.fetchImages();
-    // }
-    this.fetchImages();
+    if (this.state.inputSearch !== '') {
+      this.fetchImages();
+    }
+    // this.fetchImages();
   }
 
   // async componentDidUpdate(prevProps, prevState) {
