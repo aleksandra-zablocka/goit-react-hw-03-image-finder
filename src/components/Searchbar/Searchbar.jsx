@@ -20,8 +20,8 @@ class Searchbar extends Component {
           </button>
           <input
             type="text"
-            autocomplete="off"
-            autofocus
+            autoComplete="off"
+            autoFocus
             name="inputSearch"
             value={inputSearch}
             onChange={handleChange}

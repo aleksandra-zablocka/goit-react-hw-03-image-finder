@@ -1,6 +1,7 @@
 import css from './Modal.module.css';
 import { Component } from 'react';
 import Loader from 'components/Loader/Loader';
+import PropTypes from 'prop-types';
 
 class Modal extends Component {
   state = {
@@ -68,5 +69,11 @@ class Modal extends Component {
     );
   }
 }
+
+Modal.propTypes = {
+  src: PropTypes.string,
+  alt: PropTypes.string,
+  toggleModal: PropTypes.func,
+};
 
 export default Modal;

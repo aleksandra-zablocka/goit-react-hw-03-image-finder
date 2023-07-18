@@ -5,10 +5,10 @@ import PropTypes from 'prop-types';
 
 class ImageGallery extends Component {
   render() {
-    const { images, toggleModal } = this.props;
+    const { images } = this.props;
 
     return (
-      <div>
+      <div className={css.container}>
         {images.length > 0 ? (
           <ul className={css.imageGallery}>
             {images.map(el => (
@@ -17,7 +17,6 @@ class ImageGallery extends Component {
                 src={el.webformatURL}
                 alt={el.tags}
                 largeImageURL={el.largeImageURL}
-                toggleModal={toggleModal}
               />
             ))}
           </ul>
@@ -35,9 +34,9 @@ ImageGallery.propTypes = {
       id: PropTypes.number,
       webformatURL: PropTypes.string,
       tags: PropTypes.string,
+      largeImageURL: PropTypes.string,
     })
   ),
-  toggleModal: PropTypes.func,
 };
 
 export default ImageGallery;

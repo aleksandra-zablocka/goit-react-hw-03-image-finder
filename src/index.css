@@ -14,7 +14,6 @@ code {
     monospace;
 }
 
-
 html {
   box-sizing: border-box;
   width: 100vw;
@@ -49,4 +48,3 @@ img {
   grid-gap: 16px;
   padding-bottom: 24px;
 }
-

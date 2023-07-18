@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 class Button extends Component {
   handleClick = e => {
-    e.preventDefault(); // Zapobiegamy domyślnemu działaniu przycisku
+    e.preventDefault();
     this.props.loadMore();
   };
 
@@ -20,7 +20,6 @@ class Button extends Component {
 }
 
 Button.propTypes = {
-  page: PropTypes.number,
   loadMore: PropTypes.func,
 };
 

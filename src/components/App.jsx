@@ -96,8 +96,8 @@ export class App extends Component {
         {isSearchSubmitted && !isInputSearchEmpty && (
           <>
             {isLoading && <Loader />}
-            <ImageGallery images={images} toggleModal={this.toggleModal} />
-            <Button currentPage={currentPage} loadMore={this.loadMore} />
+            <ImageGallery images={images}  />
+            <Button loadMore={this.loadMore} />
           </>
         )}
       </div>

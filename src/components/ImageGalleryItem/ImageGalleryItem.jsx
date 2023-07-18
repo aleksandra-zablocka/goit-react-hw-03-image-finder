@@ -35,10 +35,9 @@ class ImageGalleryItem extends Component {
 }
 
 ImageGalleryItem.propTypes = {
-  key: PropTypes.number,
   src: PropTypes.string,
   alt: PropTypes.string,
-  toggleModal: PropTypes.func,
+  largeImageURL: PropTypes.string,
 };
 
 export default ImageGalleryItem;
