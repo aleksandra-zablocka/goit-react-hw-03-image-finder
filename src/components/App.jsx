@@ -82,7 +82,7 @@ export class App extends Component {
   };
 
   render() {
-    const { inputSearch, images, isLoading, currentPage, isSearchSubmitted } =
+    const { inputSearch, images, isLoading, isSearchSubmitted } =
       this.state;
     const isInputSearchEmpty = inputSearch === '';
     return (

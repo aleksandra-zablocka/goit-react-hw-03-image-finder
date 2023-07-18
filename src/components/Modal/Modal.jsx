@@ -33,7 +33,7 @@ class Modal extends Component {
   };
 
   render() {
-    const { src, toggleModal, alt } = this.props;
+    const { src, alt } = this.props;
     const { isImageLoaded } = this.state;
     return (
       <div>
