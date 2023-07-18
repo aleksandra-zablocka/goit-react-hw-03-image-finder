@@ -82,9 +82,9 @@ export class App extends Component {
   };
 
   render() {
-    const { inputSearch, images, isLoading, isSearchSubmitted } =
-      this.state;
+    const { inputSearch, images, isLoading, isSearchSubmitted } = this.state;
     const isInputSearchEmpty = inputSearch === '';
+    const hasImages = images.length > 0;
     return (
       <div>
         <Searchbar
@@ -96,8 +96,8 @@ export class App extends Component {
         {isSearchSubmitted && !isInputSearchEmpty && (
           <>
             {isLoading && <Loader />}
-            <ImageGallery images={images}  />
-            <Button loadMore={this.loadMore} />
+            <ImageGallery images={images} />
+            {hasImages && <Button loadMore={this.loadMore} />}
           </>
         )}
       </div>
