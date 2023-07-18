@@ -16,6 +16,7 @@ class ImageGallery extends Component {
                 key={el.id}
                 src={el.webformatURL}
                 alt={el.tags}
+                largeImageURL={el.largeImageURL}
                 toggleModal={toggleModal}
               />
             ))}

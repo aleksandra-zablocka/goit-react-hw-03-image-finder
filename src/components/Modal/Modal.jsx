@@ -1,7 +1,16 @@
 import css from './Modal.module.css';
 import { Component } from 'react';
+import Loader from 'components/Loader/Loader';
 
 class Modal extends Component {
+  state = {
+    isImageLoaded: false,
+  };
+
+  handleImageLoad = () => {
+    this.setState({ isImageLoaded: true });
+  };
+
   componentDidMount() {
     document.addEventListener('keydown', this.handleKeyDown);
   }
@@ -24,11 +33,18 @@ class Modal extends Component {
 
   render() {
     const { src, toggleModal, alt } = this.props;
+    const { isImageLoaded } = this.state;
     return (
       <div>
         <div className={css.overlay} onClick={this.handleBackDropClick}>
           <div className={css.modal}>
-            <img src={src} alt={alt} />
+            {!isImageLoaded && <Loader />}
+            <img
+              className={css.image}
+              src={src}
+              alt={alt}
+              onLoad={this.handleImageLoad}
+            />
             <button
               className={css.closeButton}
               type="button"

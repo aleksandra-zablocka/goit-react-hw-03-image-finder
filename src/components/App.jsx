@@ -12,13 +12,13 @@ export class App extends Component {
     currentPage: 1,
     inputSearch: '',
     isLoading: false,
+    isSearchSubmitted: false,
   };
 
   async componentDidMount() {
     if (this.state.inputSearch !== '') {
       this.fetchImages();
     }
-    // this.fetchImages();
   }
 
   // async componentDidUpdate(prevProps, prevState) {
@@ -27,9 +27,10 @@ export class App extends Component {
   //   }
   // }
 
-  // async componentWillUnmount() {
-  //   this.setState({ images: [] });
-  // }
+  async componentWillUnmount() {
+    this.setState({ images: [] });
+    this.setState({ isSearchSubmitted: false });
+  }
 
   fetchImages = async () => {
     const { inputSearch, currentPage } = this.state;
@@ -46,10 +47,13 @@ export class App extends Component {
       const data = await response.json();
 
       this.setState(prevState => ({
-        // ...prevState,
         images: [...prevState.images, ...data.hits],
         currentPage: prevState.currentPage + 1,
       }));
+
+      if (inputSearch !== '') {
+        this.setState({ isSearchSubmitted: true });
+      }
     } catch (error) {
       console.log('error', error);
       return error;
@@ -61,11 +65,16 @@ export class App extends Component {
   handleSubmit = e => {
     e.preventDefault();
     this.fetchImages();
+    this.setState({ images: [], currentPage: 1 });
   };
 
   handleChange = e => {
     const { value, name } = e.target;
     this.setState({ [name]: value });
+
+    if (this.state.isSearchSubmitted) {
+      this.setState({ isSearchSubmitted: false, images: [] });
+    }
   };
 
   loadMore = () => {
@@ -73,7 +82,9 @@ export class App extends Component {
   };
 
   render() {
-    const { inputSearch, images, isLoading, currentPage } = this.state;
+    const { inputSearch, images, isLoading, currentPage, isSearchSubmitted } =
+      this.state;
+    const isInputSearchEmpty = inputSearch === '';
     return (
       <div>
         <Searchbar
@@ -82,12 +93,13 @@ export class App extends Component {
           handleChange={this.handleChange}
         />
 
-        {isLoading ? (
-          <Loader />
-        ) : (
-          <ImageGallery images={images} toggleModal={this.toggleModal} />
+        {isSearchSubmitted && !isInputSearchEmpty && (
+          <>
+            {isLoading && <Loader />}
+            <ImageGallery images={images} toggleModal={this.toggleModal} />
+            <Button currentPage={currentPage} loadMore={this.loadMore} />
+          </>
         )}
-        <Button currentPage={currentPage} loadMore={this.loadMore} />
       </div>
     );
   }

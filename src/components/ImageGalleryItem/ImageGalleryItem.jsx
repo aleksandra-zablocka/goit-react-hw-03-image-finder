@@ -4,10 +4,6 @@ import Modal from '../Modal/Modal';
 import PropTypes from 'prop-types';
 
 class ImageGalleryItem extends Component {
-  // handleClick = () => {
-  //   this.props.toggleModal();
-  // };
-
   state = {
     isModalOpen: false,
   };
@@ -20,7 +16,7 @@ class ImageGalleryItem extends Component {
   };
 
   render() {
-    const { src, alt } = this.props;
+    const { src, alt, largeImageURL } = this.props;
 
     return (
       <li className={css.imageGalleryItem}>
@@ -30,9 +26,8 @@ class ImageGalleryItem extends Component {
           alt={alt}
           onClick={this.toggleModal}
         />
-
         {this.state.isModalOpen && (
-          <Modal src={src} alt={alt} toggleModal={this.toggleModal} />
+          <Modal src={largeImageURL} alt={alt} toggleModal={this.toggleModal} />
         )}
       </li>
     );
