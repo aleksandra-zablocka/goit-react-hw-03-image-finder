@@ -45,7 +45,7 @@ class Modal extends Component {
               alt={alt}
               onLoad={this.handleImageLoad}
             />
-            <button
+            {/* <button
               className={css.closeButton}
               type="button"
               onClick={toggleModal}
@@ -61,7 +61,7 @@ class Modal extends Component {
                   fill="#ffffff"
                 />
               </svg>
-            </button>
+            </button> */}
           </div>
         </div>
       </div>
